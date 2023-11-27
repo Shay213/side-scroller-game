@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
   const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    player.update()
+    player.update(input.keys)
     player.draw(ctx)
 
     requestAnimationFrame(animate)
