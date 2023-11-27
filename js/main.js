@@ -1,3 +1,4 @@
+import Background from "./Background.js"
 import InputHandler from "./InputHandler.js"
 import Player from "./Player.js"
 
@@ -9,11 +10,13 @@ window.addEventListener('load', () => {
 
   const input = new InputHandler()
   const player = new Player(canvas.width, canvas.height)
-  player.draw(ctx)
+  const background = new Background(canvas.width, canvas.height)
 
   const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
+    //background.update()
+    background.draw(ctx)
     player.update(input.keys)
     player.draw(ctx)
 
