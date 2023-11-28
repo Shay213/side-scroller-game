@@ -47,7 +47,7 @@ export default class Enemy {
     }
     this.#x -= this.#speed
 
-    if(this.#x < 0){
+    if(this.#x < -this.#width){
       this.#markedForDeletion = true
     }
   }
