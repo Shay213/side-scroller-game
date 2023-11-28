@@ -13,6 +13,7 @@ window.addEventListener('load', () => {
   let lastTime = 0
   let enemyTimer = 0
   let enemyInterval = getRandomEnemyInterval()
+  let score = 0
 
   const input = new InputHandler()
   const player = new Player(canvas.width, canvas.height)
@@ -28,9 +29,18 @@ window.addEventListener('load', () => {
     enemies.forEach(enemy => {
       enemy.draw(ctx)
       enemy.update(deltaTime)
+      score = enemy.updateScore(score)
     })
 
     enemies = enemies.filter(enemy => !enemy.markedForDeletion)
+  }
+
+  const displayStatusText = (ctx) => {
+    ctx.font = '40px Helvetica'
+    ctx.fillStyle = 'black'
+    ctx.fillText(`Score: ${score}`, 20, 50)
+    ctx.fillStyle = 'white'
+    ctx.fillText(`Score: ${score}`, 22, 52)
   }
 
   const animate = (timestamp) => {
@@ -44,16 +54,13 @@ window.addEventListener('load', () => {
     handleEnemies(deltaTime)
     player.draw(ctx)
     player.update(input.keys, deltaTime)
+    displayStatusText(ctx)
 
     requestAnimationFrame(animate)
   }
 
   animate(0)
 })
-
-function displayStatusText(){
-
-}
 
 function getRandomEnemyInterval(){
   return Math.random() * 1000 + 500

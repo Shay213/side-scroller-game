@@ -58,4 +58,8 @@ export default class Enemy {
       this.#x, this.#y, this.#width, this.#height
     )
   }
+
+  updateScore(score){
+    return this.#x < -this.#width ? score + 1 : score
+  }
 }
