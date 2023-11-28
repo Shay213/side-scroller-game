@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
     }
     enemies.forEach(enemy => {
       enemy.draw(ctx)
-      enemy.update()
+      enemy.update(deltaTime)
     })
   }
 
@@ -41,7 +41,7 @@ window.addEventListener('load', () => {
     background.draw(ctx)
     handleEnemies(deltaTime)
     player.draw(ctx)
-    player.update(input.keys)
+    player.update(input.keys, deltaTime)
 
     requestAnimationFrame(animate)
   }

@@ -13,6 +13,10 @@ export default class Player {
   #x
   #y
   #img
+  #maxFrame
+  #fps
+  #frameTimer
+  #frameInterval
 
   constructor(gameWidth, gameHeight) {
     this.#gameWidth = gameWidth
@@ -21,17 +25,29 @@ export default class Player {
     this.#height = 200
     this.#spriteWidth = 200
     this.#spriteHeight = 200
-    this.#frameX = 0
-    this.#frameY = 0
     this.#speed = 0
     this.#vy = 0
     this.#weight = 1
     this.#x = 0
     this.#y = this.#gameHeight - this.#height
     this.#img = playerImg
+    this.#frameX = 0
+    this.#frameY = 0
+    this.#maxFrame = 8
+    this.#fps = 20
+    this.#frameTimer = 0
+    this.#frameInterval = 1000 / this.#fps
   }
 
-  update(keys){
+  update(keys, deltaTime){
+    // sprite animation
+    this.#frameTimer += deltaTime
+    if(this.#frameTimer > this.#frameInterval){
+      this.#frameX = this.#frameX >= this.#maxFrame ? 0 : this.#frameX + 1
+      this.#frameTimer = 0
+    }
+
+    // controls
     if(keys.has('ArrowRight')){
       this.#speed = 5
     } else if(keys.has('ArrowLeft')){
@@ -53,9 +69,11 @@ export default class Player {
     if(!this.#onGround()){
       this.#vy += this.#weight
       this.#frameY = 1
+      this.#maxFrame = 6
     } else {
       this.#vy = 0
       this.#frameY = 0
+      this.#maxFrame = 8
     }
     if(this.#y > this.#gameHeight - this.#height) this.#y = this.#gameHeight - this.#height
   }

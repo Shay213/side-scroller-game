@@ -10,6 +10,10 @@ export default class Enemy {
   #y
   #frameX
   #speed
+  #maxFrame
+  #fps
+  #frameTimer
+  #frameInterval
 
   constructor(gameWidth, gameHeight) {
     this.#gameWidth = gameWidth
@@ -23,9 +27,18 @@ export default class Enemy {
     this.#y = this.#gameHeight - this.#height
     this.#frameX = 0
     this.#speed = 8
+    this.#maxFrame = 5
+    this.#fps = 20
+    this.#frameTimer = 0
+    this.#frameInterval = 1000 / this.#fps
   }
 
-  update(){
+  update(deltaTime){
+    this.#frameTimer += deltaTime
+    if(this.#frameTimer > this.#frameInterval){
+      this.#frameX = this.#frameX >= 5 ? 0 : this.#frameX + 1
+      this.#frameTimer = 0
+    }
     this.#x -= this.#speed
   }
 
