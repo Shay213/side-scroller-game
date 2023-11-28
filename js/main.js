@@ -9,7 +9,7 @@ window.addEventListener('load', () => {
   canvas.width = 800
   canvas.height = 720
 
-  const enemies = []
+  let enemies = []
   let lastTime = 0
   let enemyTimer = 0
   let enemyInterval = getRandomEnemyInterval()
@@ -29,6 +29,8 @@ window.addEventListener('load', () => {
       enemy.draw(ctx)
       enemy.update(deltaTime)
     })
+
+    enemies = enemies.filter(enemy => !enemy.markedForDeletion)
   }
 
   const animate = (timestamp) => {

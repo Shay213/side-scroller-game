@@ -14,6 +14,7 @@ export default class Enemy {
   #fps
   #frameTimer
   #frameInterval
+  #markedForDeletion
 
   constructor(gameWidth, gameHeight) {
     this.#gameWidth = gameWidth
@@ -31,6 +32,11 @@ export default class Enemy {
     this.#fps = 20
     this.#frameTimer = 0
     this.#frameInterval = 1000 / this.#fps
+    this.#markedForDeletion = false
+  }
+
+  get markedForDeletion(){
+    return this.#markedForDeletion
   }
 
   update(deltaTime){
@@ -40,6 +46,10 @@ export default class Enemy {
       this.#frameTimer = 0
     }
     this.#x -= this.#speed
+
+    if(this.#x < 0){
+      this.#markedForDeletion = true
+    }
   }
 
   draw(ctx){
