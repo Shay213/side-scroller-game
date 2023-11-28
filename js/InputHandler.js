@@ -1,8 +1,9 @@
 export default class InputHandler {
   #keys
 
-  constructor() {
+  constructor(restartGame) {
     this.#keys = new Set()
+
     window.addEventListener('keydown', e => {
       if(this.#keys.has(e.key)) return
       switch(e.key){
@@ -17,6 +18,9 @@ export default class InputHandler {
           break
         case 'ArrowRight':
           this.#keys.add(e.key)
+          break
+        case 'Enter':
+          restartGame()
           break
       }
     })

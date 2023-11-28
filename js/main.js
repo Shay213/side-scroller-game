@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
   let score = 0
   let gameOver = false
 
-  const input = new InputHandler()
+  const input = new InputHandler(restartGame)
   const player = new Player(canvas.width, canvas.height)
   const background = new Background(canvas.width, canvas.height)
 
@@ -37,6 +37,7 @@ window.addEventListener('load', () => {
   }
 
   const displayStatusText = (ctx) => {
+    ctx.textAlign = 'left'
     ctx.font = '40px Helvetica'
     ctx.fillStyle = 'black'
     ctx.fillText(`Score: ${score}`, 20, 50)
@@ -45,9 +46,9 @@ window.addEventListener('load', () => {
     if(gameOver){
       ctx.textAlign = 'center'
       ctx.fillStyle = 'black'
-      ctx.fillText('GAME OVER, try again!', canvas.width / 2, 200)
+      ctx.fillText('GAME OVER, press Enter to restart!', canvas.width / 2, 200)
       ctx.fillStyle = 'white'
-      ctx.fillText('GAME OVER, try again!', canvas.width / 2, 200)
+      ctx.fillText('GAME OVER, press Enter to restart!', canvas.width / 2, 200)
     }
   }
 
@@ -67,6 +68,15 @@ window.addEventListener('load', () => {
     displayStatusText(ctx)
 
     if(!gameOver) requestAnimationFrame(animate)
+  }
+
+  function restartGame(){
+    player.restart()
+    background.restart()
+    enemies = []
+    score = 0
+    gameOver = false
+    animate(0)
   }
 
   animate(0)

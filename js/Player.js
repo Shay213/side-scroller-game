@@ -28,7 +28,7 @@ export default class Player {
     this.#speed = 0
     this.#vy = 0
     this.#weight = 1
-    this.#x = 0
+    this.#x = 100
     this.#y = this.#gameHeight - this.#height
     this.#img = playerImg
     this.#frameX = 0
@@ -94,6 +94,13 @@ export default class Player {
       this.#img, this.#spriteWidth * this.#frameX, this.#spriteHeight * this.#frameY, this.#spriteWidth, this.#spriteHeight, 
       this.#x, this.#y, this.#width, this.#height
     )
+  }
+
+  restart(){
+    this.#x = 100
+    this.#y = this.#gameHeight - this.#height
+    this.#maxFrame = 8
+    this.#frameY = 0
   }
 
   #onGround(){
