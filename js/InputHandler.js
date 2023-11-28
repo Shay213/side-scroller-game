@@ -4,7 +4,7 @@ export default class InputHandler {
   constructor(restartGame) {
     this.#keys = new Set()
 
-    window.addEventListener('keydown', e => {
+    window.addEventListener('keydown', (e) => {
       if(this.#keys.has(e.key)) return
       switch(e.key){
         case 'ArrowDown':
@@ -24,7 +24,7 @@ export default class InputHandler {
           break
       }
     })
-    window.addEventListener('keyup', e => {
+    window.addEventListener('keyup', (e) => {
       this.#keys.delete(e.key)
     })
   }

@@ -21,8 +21,8 @@ export default class Enemy {
     this.#gameHeight = gameHeight
     this.#spriteWidth = 160
     this.#spriteHeight = 119
-    this.#width = this.#spriteWidth
-    this.#height = this.#spriteHeight
+    this.#width = this.#spriteWidth * 0.5
+    this.#height = this.#spriteHeight * 0.5
     this.#img = enemyImg
     this.#x = this.#gameWidth
     this.#y = this.#gameHeight - this.#height

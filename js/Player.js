@@ -64,7 +64,7 @@ export default class Player {
     } else if(keys.has('ArrowLeft')){
       this.#speed = -5
     } else if(keys.has('ArrowUp') && this.#onGround()){
-      this.#vy -= 10
+      this.#vy -= 25
     } else if(keys.has('ArrowDown')){
       // todo
     } else{
