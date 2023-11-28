@@ -14,6 +14,7 @@ window.addEventListener('load', () => {
   let enemyTimer = 0
   let enemyInterval = getRandomEnemyInterval()
   let score = 0
+  let gameOver = false
 
   const input = new InputHandler()
   const player = new Player(canvas.width, canvas.height)
@@ -41,6 +42,13 @@ window.addEventListener('load', () => {
     ctx.fillText(`Score: ${score}`, 20, 50)
     ctx.fillStyle = 'white'
     ctx.fillText(`Score: ${score}`, 22, 52)
+    if(gameOver){
+      ctx.textAlign = 'center'
+      ctx.fillStyle = 'black'
+      ctx.fillText('GAME OVER, try again!', canvas.width / 2, 200)
+      ctx.fillStyle = 'white'
+      ctx.fillText('GAME OVER, try again!', canvas.width / 2, 200)
+    }
   }
 
   const animate = (timestamp) => {
@@ -53,10 +61,12 @@ window.addEventListener('load', () => {
     background.draw(ctx)
     handleEnemies(deltaTime)
     player.draw(ctx)
-    player.update(input.keys, deltaTime)
+    player.update(input.keys, deltaTime, enemies, () => {
+      gameOver = true
+    })
     displayStatusText(ctx)
 
-    requestAnimationFrame(animate)
+    if(!gameOver) requestAnimationFrame(animate)
   }
 
   animate(0)

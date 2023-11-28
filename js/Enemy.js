@@ -39,10 +39,26 @@ export default class Enemy {
     return this.#markedForDeletion
   }
 
+  get x(){
+    return this.#x
+  }
+
+  get y(){
+    return this.#y
+  }
+
+  get width(){
+    return this.#width
+  }
+
+  get height(){
+    return this.#height
+  }
+
   update(deltaTime){
     this.#frameTimer += deltaTime
     if(this.#frameTimer > this.#frameInterval){
-      this.#frameX = this.#frameX >= 5 ? 0 : this.#frameX + 1
+      this.#frameX = this.#frameX >= this.#maxFrame ? 0 : this.#frameX + 1
       this.#frameTimer = 0
     }
     this.#x -= this.#speed

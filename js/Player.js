@@ -39,7 +39,18 @@ export default class Player {
     this.#frameInterval = 1000 / this.#fps
   }
 
-  update(keys, deltaTime){
+  update(keys, deltaTime, enemies, handleCollision){
+    // collision detection
+    enemies.forEach(enemy => {
+      const dx = (enemy.x + enemy.width / 2) - (this.#x + this.#width / 2)
+      const dy = (enemy.y + enemy.height / 2) - (this.#y + this.#height / 2)
+      const distance = Math.sqrt(dx * dx + dy * dy)
+
+      if(distance < enemy.width / 2 + this.#width / 2){
+        handleCollision()
+      }
+    });
+
     // sprite animation
     this.#frameTimer += deltaTime
     if(this.#frameTimer > this.#frameInterval){
